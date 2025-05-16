@@ -1,0 +1,230 @@
+/* ESTILOS PARA LAYOUT */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.cont_custom_layout {
+    border-bottom: solid 10px #3f4b56;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header_custom_layout {
+    background-color: #3f4b56;
+    color: #fff;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.header_custom_layout h1 {
+    font-family: "Work Sans", sans-serif;
+    padding-left: 25px;
+    margin: 0;
+    color: inherit !important;
+    text-decoration: inherit !important;
+}
+
+.content {
+    background-color: #fff;
+    flex-grow: 1;
+    padding: 25px 25px 0px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    width: 350px;
+    height: auto;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -30%);
+    background-color: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h3 {
+    color: #333;
+}
+
+.modal-content input {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.modal-content button {
+    padding: 8px 16px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #333;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 15px;
+    cursor: pointer;
+}
+/* ESTILOS PARA LAYOUT */
+
+/* ESTILOS PARA MAIN.EJS */
+.title_company h2 {
+    font-family: "Work Sans", sans-serif;
+    font-size: 2.5em;
+    text-align: center;
+    margin: 0;
+    color: #333;
+}
+
+#programas button.selected-program {
+    background-color: #007BFF;
+    color: white;
+    border: 2px solid #0056b3;
+}
+
+#programas button {
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+#empresas button.selected-company {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #1e7e34;
+}
+
+#empresas button {
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem;
+    border: 1px solid #ccc;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+/* ESTILOS PARA MAIN.EJS */
+
+/* ESTILOS PARA VISTAS DE PROGRAMAS POR EMPRESA */
+.btn_custom {
+    background-color: #3f4b56;
+    color: #fff;
+    font-weight: bold;
+    border: solid 2px #a5cdc8;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+.btn_custom:hover {
+    background-color: #a5cdc8;
+    color: #3f4b56;
+    font-weight: bold;
+    border: solid 2px #3f4b56;
+    border-radius: 0px;
+}
+
+.btn_custom_trja {
+    background-color: #294449;
+    color: #fff;
+    font-weight: bold;
+    border: solid 2px #eb9e47;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+.btn_custom_trja:hover {
+    background-color: #eb9e47;
+    color: #294449;
+    font-weight: bold;
+    border: solid 2px #294449;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+.btn_custom_enp {
+    background-color: #c5c5c5;
+    color: #000;
+    font-weight: bold;
+    border: solid 2px #00953d;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+.btn_custom_enp:hover {
+    background-color: #00953d;
+    color: #000;
+    font-weight: bold;
+    border: solid 2px #c5c5c5;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+.btn_custom_file {
+    background-color: #3f4b56;
+    color: #fff;
+    border: solid 2px #a5cdc8;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+
+.btn_custom_file:hover {
+    background-color: #a5cdc8;
+    color: #3f4b56;
+    border: solid 2px #a5cdc8;
+    border-radius: 0px;
+}
+
+.btn_custom_folder {
+    background-color: #3f4b56;
+    color: #fff;
+    border: solid 2px #a5cdc8;
+    border-radius: 3px;
+    padding: 6px 16px;
+}
+
+
+.btn_custom_folder:hover {
+    background-color: #a5cdc8;
+    color: #3f4b56;
+    border: solid 2px #a5cdc8;
+    border-radius: 0px;
+}
+
+/* Estilo para deshabilitar el hover */
+.btn_disabled {
+    pointer-events: none; /* Desactiva clics y hover */
+    opacity: 0.6; /* Reduce la opacidad para indicar deshabilitado */
+    cursor: not-allowed; /* Cambia el cursor a un ícono de no permitido */
+}
+
+#logOutput {
+    margin-top: 20px;
+}
+
+#logArea {
+    width: 100%;
+    height: 300px;
+}
+/* ESTILOS PARA VISTAS DE PROGRAMAS */

@@ -1,0 +1,31 @@
+<div class="col-12 col-md-2">
+    <!-- Selector de archivos con botón "X" para limpiar -->
+    <div style="display: flex; align-items: center;">
+            <label for="selectFileInput" class="btn_custom_file">Seleccionar archivo/s</label>
+            <input type="file" id="selectFileInput" class="form-control" multiple style="display: none;">
+            <button id="clearFileSelection" class="btn btn-danger btn-sm" style="display: none; margin-left: 5px;">X</button>
+    </div>
+    <!-- Contenedor para mostrar los archivos seleccionados -->
+    <div id="selectedFiles" style="margin: 5px 0 20px 0; font-size: 0.9em; color: #555;">Ningún archivo seleccionado</div>
+    
+    <!-- Selector de carpeta con botón "X" para limpiar -->
+    <div style="display: flex; align-items: center;">
+        <label for="selectFolderInput" class="btn_custom_folder">Seleccionar carpeta</label>
+        <input type="file" id="selectFolderInput" class="form-control" webkitdirectory directory style="display: none;">
+        <button id="clearFolderSelection" class="btn btn-danger btn-sm" style="display: none; margin-left: 5px;">X</button>
+    </div>
+    <!-- Contenedor para mostrar la carpeta seleccionada -->
+    <div id="selectedFolder" style="margin: 5px 0 20px 0; font-size: 0.9em; color: #555;">Ninguna carpeta seleccionada</div>
+
+    <!-- Botón de ejecución oculto por defecto -->
+    <button id="executeButton" class="btn_custom" style="display: none;">Ejecutar</button>
+</div>
+<div class="col-12 col-md-10">
+    <div id="logOutput">
+        <h3>Logs del Sistema:</h3>
+        <!-- Contenedor para los logs -->
+        <div id="logsContainer" style="overflow-y: auto; max-height: 300px; border: 1px solid #ccc; padding: 10px;"></div>
+    </div>
+</div>
+
+<% customScript = `<script src="/lectorMain.js"></script>` %>

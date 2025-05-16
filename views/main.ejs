@@ -1,0 +1,19 @@
+<div class="text-center title_company">
+    <h2>Seleccione una Programa</h2>
+    <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 25rem !important"/>
+</div>
+<div id="programas">
+    <button data-program="gestor" onclick="selectProgram('gestor')">Gestor de Facturas</button>
+    <button data-program="lector" onclick="selectProgram('lector')">Lector de Facturas</button>
+    <button data-program="reenviador" onclick="selectProgram('reenviador')">Reenviador de Facturas</button>
+</div>
+
+<div class="text-center title_company">
+    <h2>Seleccione una empresa</h2>
+    <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 25rem !important"/>
+</div>
+<div id="empresas">
+    <button data-company="ienel" onclick="selectCompany('ienel')" disabled>IENEL</button>
+    <button data-company="trja" onclick="selectCompany('trja')" disabled>3JA</button>
+    <button data-company="enp" onclick="selectCompany('enp')" disabled>ENP</button>
+</div>
