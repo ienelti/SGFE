@@ -2,60 +2,33 @@ const { connectToOdoo, getPostedInvoices } = require('../services/odooService');
 const { processZips } = require('../services/zipProcessorService');
 const { clearCurrentLogFile, createLogger } = require('../utils/logger');
 
-const EMPRESAS = [
-  {
-    nombre: 'IENEL',
-    companyId: 1,
-    zipSource: process.env.ZIP_SOURCE_PATH,
-    zipDest: process.env.ZIP_DEST_PATH,
-    zipRejected: process.env.ZIP_REJECTED_PATH
-  },
-  {
-    nombre: 'TRJA',
-    companyId: 2,
-    zipSource: process.env.TRJA_ZIP_SOURCE_PATH,
-    zipDest: process.env.TRJA_ZIP_DEST_PATH,
-    zipRejected: process.env.TRJA_ZIP_REJECTED_PATH
-  },
-  {
-    nombre: 'ENP',
-    companyId: 3,
-    zipSource: process.env.ENP_ZIP_SOURCE_PATH,
-    zipDest: process.env.ENP_ZIP_DEST_PATH,
-    zipRejected: process.env.ENP_ZIP_REJECTED_PATH
-  }
-];
-
 // Ejecutar el proceso para una empresa específica
 async function mainReenviador() {
-  const programa = 'REENVIADOR';
+  const programa = 'reenviador';
+  const empresa = 'index';
 
-  for (const empresa of EMPRESAS) {
-    const { log, logError } = createLogger(programa, empresa.nombre);
-    
-    try {
-      await clearCurrentLogFile(programa, empresa.nombre);
+  const { log, logError } = createLogger(programa, empresa);
+  
+  try {
+    await clearCurrentLogFile(programa, empresa);
 
-      log(`Iniciando proceso para la empresa: ${empresa.nombre}`);
+    await startApp(log, logError);
 
-      await startApp(empresa, log, logError);
-
-    } catch (error) {
-      logError(`Error ejecutando el proceso para la empresa: ${empresa.nombre}`, error);
-      console.log(`Error ejecutando el proceso para la empresa: ${empresa.nombre}`, error);
-    }
+  } catch (error) {
+    logError('Error ejecutando el programa reenviador', error);
+    console.log('Error ejecutando el programa reenviador', error);
   }
 }
 
-const startApp = async (empresa, log, logError) => {
+const startApp = async (log, logError) => {
   try {
     const message = await connectToOdoo();
     log(message);
 
-    const invoices = await getPostedInvoices(empresa.companyId);
+    const invoices = await getPostedInvoices();
     const cufes = invoices.map(inv => inv.x_studio_cufecude).filter(Boolean);
 
-    await processZips(cufes, 100, empresa, log, logError);
+    await processZips(cufes, 100, log, logError);
     return { success: true, processed: cufes.length };
   } catch (error) {
     logError(error);

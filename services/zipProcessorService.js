@@ -5,12 +5,15 @@ const { parseXMLContent } = require('./xmlParserService');
 const { sendInvoiceEmail } = require('./emailSender');
 
 const recipientEmail = process.env.RECIPIENT_EMAIL;
+const zipSourcePath = process.env.ZIP_SOURCE_PATH;
+const zipDestPath = process.env.ZIP_DEST_PATH;
+const zipRejectedPath = process.env.ZIP_REJECTED_PATH;
 
-const processZips = async (validCufes, limit, empresa, log, logError) => {
-  const zipFiles = fs.readdirSync(empresa.zipSource).filter(file => file.endsWith('.zip')).slice(0, limit);
+const processZips = async (validCufes, limit, log, logError) => {
+  const zipFiles = fs.readdirSync(zipSourcePath).filter(file => file.endsWith('.zip')).slice(0, limit);
 
   for (const zipFile of zipFiles) {
-    const fullZipPath = path.join(empresa.zipSource, zipFile);
+    const fullZipPath = path.join(zipSourcePath, zipFile);
     const zip = new AdmZip(fullZipPath);
     const entries = zip.getEntries();
 
@@ -31,17 +34,17 @@ const processZips = async (validCufes, limit, empresa, log, logError) => {
 
       if (isCUFEValid && isInvoice && isCreditPayment) {
         await sendInvoiceEmail(recipientEmail, fullZipPath, log, logError);
-        await moveFile(fullZipPath, path.join(empresa.zipDest, zipFile)); // A match/
+        await moveFile(fullZipPath, path.join(zipDestPath, zipFile)); // A match/
         log(`Enviado y movido: ${zipFile}`);
       } else {
         log(`No cumple condiciones para ser enviado: ${zipFile}`);
         
-        await moveToRejected(fullZipPath, path.join(empresa.zipRejected, zipFile), zipFile, log); // No match
+        await moveToRejected(fullZipPath, path.join(zipRejectedPath, zipFile), zipFile, log); // No match
       }
     } catch (err) {
       logError(`Error procesando ${zipFile}:`, err.message);
       console.error(`Error procesando ${zipFile}:`, err.message);
-      await moveToRejected(fullZipPath, path.join(empresa.zipRejected, zipFile), zipFile); // No match
+      await moveToRejected(fullZipPath, path.join(zipRejectedPath, zipFile), zipFile); // No match
     }
   }
 };

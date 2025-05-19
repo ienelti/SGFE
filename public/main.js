@@ -16,7 +16,7 @@ function selectProgram(program) {
     }
 
     // Si el programa es "lector", redirige directamente
-    if (program === 'lector') {
+    if (program === 'lector' || program === 'reenviador') {
         setTimeout(() => {
             window.location.href = `/${program}/index`;
         }, 300); // Le dejamos el delay para que se vea el efecto visual

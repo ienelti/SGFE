@@ -21,11 +21,11 @@ const connectToOdoo = () => {
 };
 
 // Función corregida para buscar facturas publicadas
-const getPostedInvoices = (companyId) => {
+const getPostedInvoices = () => {
   return new Promise((resolve, reject) => {
     const domain = [
       ["state", "=", "posted"],
-      ["company_id", "=", companyId], // Filtra sólo registros activos y de la compañia IENEL(1) // 3JA(2) ENP(3)
+      ["company_id", "=", 1], // Filtra sólo registros activos y de la compañia IENEL(1)
       ["x_studio_cufecude", "!=", false],  // Excluye valores nulos o falsos
       ["x_studio_cufecude", "!=", ""]      // Excluye valores vacíos
     ];
