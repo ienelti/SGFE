@@ -2,6 +2,14 @@ const { DOMParser } = require("xmldom");
 const xpath = require("xpath");
 const xml2js = require("xml2js");
 
+// Función de sanitización que reemplaza cualquier carácter no válido
+function sanitizeText(input) {
+  if (typeof input !== 'string') return input;
+
+  // Reemplazar el carácter Unicode de reemplazo por '?'
+  return input.replace(/\uFFFD/g, '?');
+}
+
 // Función para analizar el XML directamente desde el contenido
 async function parseXML(xmlContent, log, logError) {
   try {
@@ -174,7 +182,7 @@ async function parseXML(xmlContent, log, logError) {
         }
       }
     }
-    const DocumentType = DocumentTypeTemp;
+    const DocumentType = sanitizeText(DocumentTypeTemp);
 
     // TIPO DE DOCUMENTO PARA ODOO
     let DocumentTypeTemp2 = "";
@@ -205,10 +213,10 @@ async function parseXML(xmlContent, log, logError) {
         }
       }
     }
-    const DocumentType2 = DocumentTypeTemp2;
+    const DocumentType2 = sanitizeText(DocumentTypeTemp2);
 
     // CONSECUTIVO DE FACTURA
-    const consecutiveInvoice = select("//cbc:ID/text()", document)[0]?.nodeValue || 'N/A';
+    const consecutiveInvoice = sanitizeText(select("//cbc:ID/text()", document)[0]?.nodeValue || 'N/A');
 
     // PREFIJO O NÚMERO RELACIONADO
     let prefixNumberTemp = select("//cbc:ParentDocumentID/text()", document)[0]?.nodeValue ?? 'N/A';
@@ -221,7 +229,7 @@ async function parseXML(xmlContent, log, logError) {
     const prefixNumber = prefixNumberTemp;
 
     // EMPRESA EMISORA
-    const issuerCompany = select("//cac:SenderParty/cac:PartyTaxScheme/cbc:RegistrationName/text() | //cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName/text()", document)[0]?.nodeValue || 'N/A';
+    const issuerCompany = sanitizeText(select("//cac:SenderParty/cac:PartyTaxScheme/cbc:RegistrationName/text() | //cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:RegistrationName/text()", document)[0]?.nodeValue || 'N/A');
 
     // NIT DE LA EMPRESA EMISORA
     const issuerNit = select("//cac:SenderParty/cac:PartyTaxScheme/cbc:CompanyID/text() | //cac:AccountingSupplierParty/cac:Party/cac:PartyTaxScheme/cbc:CompanyID/text()", document)[0]?.nodeValue || 'N/A';
@@ -289,8 +297,8 @@ async function parseXML(xmlContent, log, logError) {
 
       // Extraer cada campo dentro del nodo actual `<InvoiceLine>`
       const item = getValue("./cbc:ID/text()", node);
-      const codigo = getValue("./cac:Item/cac:StandardItemIdentification/cbc:ID/text()", node);
-      const descripcion = getValue("./cac:Item/cbc:Description/text()", node);
+      const codigo = sanitizeText(getValue("./cac:Item/cac:StandardItemIdentification/cbc:ID/text()", node));
+      const descripcion = sanitizeText(getValue("./cac:Item/cbc:Description/text()", node));
       const cantidad = normalizeNumeric(getValue("./cbc:InvoicedQuantity/text()", node) || 1);
 
       // Asignar valores a las constantes según el orden de las rutas
@@ -325,7 +333,7 @@ async function parseXML(xmlContent, log, logError) {
       const valorUni = normalizeNumeric(Number(valorUniXCant) / Number(cantidad));
       const TaxValorUni = normalizeNumeric(Number(taxValorXCant) / Number(cantidad));
       const valorUniSinIva = normalizeNumeric(Number(valorUniSinIvaXCant) / Number(cantidad));
-      const taxTipo = getValue("./cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name/text()", node);
+      const taxTipo = sanitizeText(getValue("./cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:Name/text()", node));
       const taxPorcentaje = normalizeNumeric(getValue("./cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:Percent/text()", node));
 
       // Constante que almacena el valorUni + el TaxValorUni solo si el taxTipo es 'INC'
@@ -366,7 +374,7 @@ async function parseXML(xmlContent, log, logError) {
           }
         }
       }
-      const DocumentTypeItem = DocumentTypeItemTemp;
+      const DocumentTypeItem = sanitizeText(DocumentTypeItemTemp);
 
       const prefixNumberPago = prefixNumber;
 
