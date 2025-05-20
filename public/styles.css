@@ -5,10 +5,10 @@ html, body {
 }
 
 .cont_custom_layout {
-    border-bottom: solid 10px #3f4b56;
+    border-bottom: solid 10px #1f2225;
     padding-top: 10px;
     padding-bottom: 0px;
-    background-color: #fff;
+    background-color: #1f2225;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -34,6 +34,16 @@ html, body {
     background-color: #fff;
     flex-grow: 1;
     padding: 25px 25px 0px;
+}
+
+.centrado {
+    align-content: center;
+    text-align: center;
+}
+
+.centrado_izq {
+    align-content: center;
+    text-align: left;
 }
 
 .modal {
@@ -87,6 +97,17 @@ html, body {
 /* ESTILOS PARA LAYOUT */
 
 /* ESTILOS PARA MAIN.EJS */
+.main_title p {
+    font-size: 2rem;
+}
+
+.main_title img {
+    width: 20%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 20px;
+}
+
 .title_company h2 {
     font-family: "Work Sans", sans-serif;
     font-size: 2.5em;
@@ -95,12 +116,9 @@ html, body {
     color: #333;
 }
 
-#programas button.selected-program {
-    background-color: #007BFF;
-    color: white;
-    border: 2px solid #0056b3;
+#programas {
+    text-align: center;
 }
-
 #programas button {
     transition: all 0.2s ease;
     padding: 0.5rem 1rem;
@@ -108,12 +126,17 @@ html, body {
     border: 1px solid #ccc;
     background-color: #f2f2f2;
     cursor: pointer;
+    width: 12rem;
 }
 
-#empresas button.selected-company {
-    background-color: #28a745;
+#programas button.selected-program {
+    background-color: #3f4b56;
     color: white;
-    border: 2px solid #1e7e34;
+    border: 2px solid #1f2225;
+}
+
+#empresas {
+    text-align: center;
 }
 
 #empresas button {
@@ -123,10 +146,24 @@ html, body {
     border: 1px solid #ccc;
     background-color: #f2f2f2;
     cursor: pointer;
+    width: 12rem;
+}
+
+#empresas button.selected-company {
+    background-color: #3f4b56;
+    color: white;
+    border: 2px solid #1f2225;
 }
 /* ESTILOS PARA MAIN.EJS */
 
 /* ESTILOS PARA VISTAS DE PROGRAMAS POR EMPRESA */
+.empresa_logo img {
+    width: 15%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 20px;
+}
+
 .btn_custom {
     background-color: #3f4b56;
     color: #fff;
@@ -181,35 +218,48 @@ html, body {
 }
 
 .btn_custom_file {
-    background-color: #3f4b56;
-    color: #fff;
-    border: solid 2px #a5cdc8;
+    background-color: #f2f2f2;
+    color: #000;
+    border: solid 2px #ccc;
     border-radius: 3px;
     padding: 6px 16px;
 }
 
 
 .btn_custom_file:hover {
-    background-color: #a5cdc8;
-    color: #3f4b56;
-    border: solid 2px #a5cdc8;
+    background-color: #3f4b56;
+    color: #fff;
+    border: solid 2px #1f2225;
     border-radius: 0px;
 }
 
 .btn_custom_folder {
-    background-color: #3f4b56;
-    color: #fff;
-    border: solid 2px #a5cdc8;
+    background-color: #f2f2f2;
+    color: #000;
+    border: solid 2px #ccc;
     border-radius: 3px;
     padding: 6px 16px;
 }
 
 
 .btn_custom_folder:hover {
-    background-color: #a5cdc8;
-    color: #3f4b56;
-    border: solid 2px #a5cdc8;
+    background-color: #3f4b56;
+    color: #fff;
+    border: solid 2px #1f2225;
     border-radius: 0px;
+}
+
+.btn_custom_lector {
+    background-color: #f2f2f2;
+    color: #000;
+    border: solid 2px #ccc;
+    padding: 6px 16px;
+}
+
+.btn_custom_lector:hover {
+    background-color: #3f4b56;
+    color: #fff;
+    border: solid 2px #1f2225;
 }
 
 /* Estilo para deshabilitar el hover */
@@ -227,4 +277,4 @@ html, body {
     width: 100%;
     height: 300px;
 }
-/* ESTILOS PARA VISTAS DE PROGRAMAS */
+/* ESTILOS PARA VISTAS DE PROGRAMAS POR EMPRESA */

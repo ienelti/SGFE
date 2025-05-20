@@ -1,19 +1,34 @@
-<div class="text-center title_company">
-    <h2>Seleccione una Programa</h2>
-    <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 25rem !important"/>
-</div>
-<div id="programas">
-    <button data-program="gestor" onclick="selectProgram('gestor')">Gestor de Facturas</button>
-    <button data-program="lector" onclick="selectProgram('lector')">Lector de Facturas</button>
-    <button data-program="reenviador" onclick="selectProgram('reenviador')">Reenviador de Facturas</button>
+<div class="main_title row">
+    <div class="col-12 col-lg-6 centrado">
+        <p>Selecciona un programa y una empresa</p>
+    </div>
+    <div class="col-12 col-lg-6 centrado">
+        <img src="/images/logo_IENEL.png" alt="Logo IENEL">
+        <img src="/images/logo_3JA.png" alt="Logo 3JA">
+        <img src="/images/logo_ENP.png" alt="Logo ENP">
+    </div>
 </div>
 
-<div class="text-center title_company">
-    <h2>Seleccione una empresa</h2>
-    <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 25rem !important"/>
+<div class="col-12 col-md-6">
+    <div class="text-center title_company">
+        <h2>Programas</h2>
+        <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 10rem !important"/>
+    </div>
+    <div id="programas">
+        <button data-program="gestor" onclick="selectProgram('gestor')">Gestor</button><br/>
+        <button data-program="lector" onclick="selectProgram('lector')">Lector</button><br/>
+        <button data-program="reenviador" onclick="selectProgram('reenviador')">Reenviador</button>
+    </div>
 </div>
-<div id="empresas">
-    <button data-company="ienel" onclick="selectCompany('ienel')" disabled>IENEL</button>
-    <button data-company="trja" onclick="selectCompany('trja')" disabled>3JA</button>
-    <button data-company="enp" onclick="selectCompany('enp')" disabled>ENP</button>
+
+<div class="col-12 col-md-6">
+    <div class="text-center title_company">
+        <h2>Empresas</h2>
+        <hr style="opacity: 0.5 !important; border: solid 1px !important; margin: 1rem 10rem !important"/>
+    </div>
+    <div id="empresas">
+        <button data-company="ienel" onclick="selectCompany('ienel')" disabled>IENEL</button><br/>
+        <button data-company="trja" onclick="selectCompany('trja')" disabled>3JA</button><br/>
+        <button data-company="enp" onclick="selectCompany('enp')" disabled>ENP</button>
+    </div>
 </div>
