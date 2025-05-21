@@ -34,8 +34,8 @@ app.listen(PORT, ADDRESS, () => {
 // Ejecutar de inmediato al iniciar
 mainReenviador();
 
-// Ejecutar cada 15 minutos
+/* // Ejecutar cada 15 minutos
 setInterval(() => {
   console.log(" Ejecutando nuevamente Reenviador de Facturas a DATAICO...");
   mainReenviador();
-}, 15 * 60 * 1000); // 15 minutos en milisegundos
+}, 15 * 60 * 1000); // 15 minutos en milisegundos */

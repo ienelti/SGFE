@@ -41,7 +41,7 @@ async function extractZip(zipPath, empresa, log, logError) {
                 break; // si se logró abrir, salimos del bucle
             } catch (error) {
                 intento++;
-                log(`[Advertencia] Fallo al abrir ZIP (${zipPath}) intento ${intento}: ${error.message}`);
+                log(`Fallo al abrir ZIP (${zipPath}) intento ${intento}: ${error.message}`);
                 if (intento === maxIntentos) {
                     logError(`[Error] No se pudo abrir el ZIP después de ${maxIntentos} intentos: ${zipPath}`);
                     return { xmlFiles: [], pdfFiles: [] };
@@ -253,6 +253,15 @@ async function extractZip(zipPath, empresa, log, logError) {
     } catch (error) {
         logError(`[Error] Error al eliminar la subcarpeta temporal: ${tempFolder}`, error);
         console.error(`[Error] Error al eliminar la subcarpeta temporal: ${tempFolder}`, error);
+    }
+
+    // Eliminar el ZIP después de procesamiento exitoso
+    try {
+        await fsPromises.unlink(zipPath);
+        log(`Archivo ZIP eliminado tras procesamiento exitoso: ${zipPath}`);
+    } catch (error) {
+        logError(`[Error] No se pudo eliminar el ZIP tras éxito: ${zipPath}`, error);
+        console.error(`[Error] No se pudo eliminar el ZIP tras éxito: ${zipPath}`, error);
     }
     
     return { xmlFiles, pdfFiles };

@@ -75,11 +75,16 @@ async function downloadAttachments(accessToken, empresa, log, logError) {
 
             if (zipAdjuntos.length > 0) {
                 for (const att of zipAdjuntos) {
-                    const filePath = getUniqueFileName(path.join(downloadFolder, att.name));
+                    // Ruta en DATAICO (para Reenviador)
+                    const originalZipPath = getUniqueFileName(path.join(downloadFolder, att.name));
                     const buffer = Buffer.from(att.contentBytes, 'base64');
-            
-                    fs.writeFileSync(filePath, buffer);
-                    downloadedFiles.push(filePath); // guardar la ruta
+                    fs.writeFileSync(originalZipPath, buffer);
+
+                    // Ruta para el Gestor (en carpeta principal de empresa)
+                    const gestorZipPath = getUniqueFileName(path.join(downloadFolders[empresa], att.name));
+                    fs.copyFileSync(originalZipPath, gestorZipPath);
+
+                    downloadedFiles.push(gestorZipPath); // Solo esta copia es usada por el Gestor
                 }
             
                 // Marcar mensaje con bandera roja (flag)
