@@ -75,16 +75,24 @@ async function downloadAttachments(accessToken, empresa, log, logError) {
 
             if (zipAdjuntos.length > 0) {
                 for (const att of zipAdjuntos) {
-                    // Ruta en DATAICO (para Reenviador)
-                    const originalZipPath = getUniqueFileName(path.join(downloadFolder, att.name));
                     const buffer = Buffer.from(att.contentBytes, 'base64');
-                    fs.writeFileSync(originalZipPath, buffer);
 
-                    // Ruta para el Gestor (en carpeta principal de empresa)
-                    const gestorZipPath = getUniqueFileName(path.join(downloadFolders[empresa], att.name));
-                    fs.copyFileSync(originalZipPath, gestorZipPath);
+                    if (empresa === 'IENEL') {
+                        // Guardar en DATAICO y hacer copia a carpeta oficial
+                        const originalZipPath = getUniqueFileName(path.join(downloadFolder, att.name));
+                        fs.writeFileSync(originalZipPath, buffer);
 
-                    downloadedFiles.push(gestorZipPath); // Solo esta copia es usada por el Gestor
+                        const gestorZipPath = getUniqueFileName(path.join(downloadFolders[empresa], att.name));
+                        fs.copyFileSync(originalZipPath, gestorZipPath);
+
+                        downloadedFiles.push(gestorZipPath); // Solo esta copia es usada por el Gestor
+                    } else {
+                        // Para TRJA y ENP, guardar directamente en carpeta oficial sin usar DATAICO
+                        const directZipPath = getUniqueFileName(path.join(downloadFolders[empresa], att.name));
+                        fs.writeFileSync(directZipPath, buffer);
+
+                        downloadedFiles.push(directZipPath);
+                    }
                 }
             
                 // Marcar mensaje con bandera roja (flag)
