@@ -28,7 +28,7 @@ const startApp = async (log, logError) => {
     const invoices = await getPostedInvoices();
     const cufes = invoices.map(inv => inv.x_studio_cufecude).filter(Boolean);
 
-    await processZips(cufes, 100, log, logError);
+    await processZips(cufes, log, logError);
     return { success: true, processed: cufes.length };
   } catch (error) {
     logError(error);

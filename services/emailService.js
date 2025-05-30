@@ -98,7 +98,7 @@ async function downloadAttachments(accessToken, empresa, log, logError) {
                 // Marcar mensaje con bandera roja (flag)
                 const marcado = await marcarCorreo(client, sharedMailbox, msg.id, retries=3, logError);
                 if (!marcado) {
-                    logError(`[Advertencia] No se pudo marcar el correo ${msg.subject} (${msg.id}) después de varios intentos`);
+                    logError(`[Error] No se pudo marcar el correo ${msg.subject} (${msg.id}) después de varios intentos`);
                 } else {
                     log(`Mensaje marcado con bandera: ${msg.subject}`);
                 }
